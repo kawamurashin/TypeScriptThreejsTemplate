@@ -13,25 +13,17 @@ var View;
             this._renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(this._renderer.domElement);
             this.resize();
-            this.update();
         }
         ;
         resize() {
-            // サイズを取得
             const width = window.innerWidth;
             const height = window.innerHeight;
-            // レンダラーのサイズを調整する
             this._renderer.setPixelRatio(window.devicePixelRatio);
             this._renderer.setSize(width, height);
-            // カメラのアスペクト比を正す
             this._camera.aspect = width / height;
             this._camera.updateProjectionMatrix();
         }
-        update() {
-            const animation = () => {
-                this.update();
-            };
-            window.requestAnimationFrame(animation);
+        enterFrame() {
             this._mesh.rotation.x += 0.01;
             this._mesh.rotation.y += 0.02;
             this._renderer.render(this._scene, this._camera);
@@ -50,6 +42,14 @@ class Main {
         };
         this._viewManager = new ViewManager();
         window.addEventListener('resize', resize);
+        this.enterFrame();
+    }
+    enterFrame() {
+        const animation = () => {
+            this.enterFrame();
+        };
+        this._viewManager.enterFrame();
+        window.requestAnimationFrame(animation);
     }
     resizeHandler() {
         this._viewManager.resize();

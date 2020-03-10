@@ -10,6 +10,16 @@ class Main {
         };
         this._viewManager = new ViewManager();
         window.addEventListener('resize', resize);
+        this.enterFrame();
+    }
+    private enterFrame():void
+    {
+        const animation = () =>
+        {
+            this.enterFrame();
+        };
+        this._viewManager.enterFrame();
+        window.requestAnimationFrame( animation );
     }
     private resizeHandler():void
     {

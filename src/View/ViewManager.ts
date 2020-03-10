@@ -19,30 +19,17 @@ namespace View
             this._renderer.setSize( window.innerWidth, window.innerHeight );
             document.body.appendChild( this._renderer.domElement );
             this.resize();
-            this.update();
         };
         public resize():void
         {
-
-            // サイズを取得
             const width = window.innerWidth;
             const height = window.innerHeight;
-
-            // レンダラーのサイズを調整する
             this._renderer.setPixelRatio(window.devicePixelRatio);
             this._renderer.setSize(width, height);
-
-            // カメラのアスペクト比を正す
             this._camera.aspect = width / height;
             this._camera.updateProjectionMatrix();
-
         }
-        private update():void {
-            const animation = () =>
-            {
-                this.update();
-            };
-            window.requestAnimationFrame( animation );
+        public enterFrame():void {
             this._mesh.rotation.x += 0.01;
             this._mesh.rotation.y += 0.02;
             this._renderer.render( this._scene, this._camera );
