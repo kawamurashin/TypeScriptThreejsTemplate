@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "amd",
+    "target": "es6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outFile": "script/ts.js"
+  },
+  "include": [ "./src/**/*.ts" ]
+}
